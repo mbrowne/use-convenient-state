@@ -5,12 +5,12 @@
   "repository": "https://github.com/mbrowne/use-convenient-state",
   "author": "Matt Browne",
   "license": "ISC",
-  "main": "lib/index.js",
+  "module": "lib/index.js",
   "scripts": {
     "build": "tsc --sourceMap",
     "test": "jest",
     "predemo": "yarn build",
-    "demo": "yarn --cwd demo start"
+    "demo": "cd demo && yarn && yarn start"
   },
   "jest": {
     "roots": [

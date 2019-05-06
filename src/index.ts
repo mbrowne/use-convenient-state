@@ -50,7 +50,6 @@ export default function useConvenientState<
         }
 
         if (!accessorsInitialized) {
-            stateMeta.accessorsInitialized = true
             if (createGettersSetters) {
                 Object.defineProperty(accessors, key, {
                     enumerable: true,
@@ -66,7 +65,16 @@ export default function useConvenientState<
             })
         }
     }
-    return accessors
+    if (!accessorsInitialized) {
+        stateMeta.accessorsInitialized = true
+    }
+    return createGettersSetters
+        ? accessors
+        : // If `createGettersSetters` is false, we freeze the state object prior to returning it to prevent direct
+          // state mutations. We copy it first since we still need to mutate our internal `accessors` object.
+          Object.freeze(
+              Object.create(null, Object.getOwnPropertyDescriptors(accessors))
+          )
 }
 
 function upperFirst(str: string) {

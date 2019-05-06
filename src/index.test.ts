@@ -47,15 +47,12 @@ test('mutating state with callback setter', () => {
 
 test('respects `createGettersSetters` option', () => {
     const { result } = renderHook(() => useConvenientState(initialState, false))
-    act(() => {
-        const state = result.current
-        state.fruit = 'orange'
-    })
-    // the component hasn't re-rendered yet, so `result.current` should just a regular JS object
-    // at this point.
-    expect(result.current.fruit).toBe('orange')
-    const {
-        result: { current },
-    } = renderHook(() => useConvenientState(initialState, false))
-    expect(current.fruit).toBe('banana')
+    expect(() => {
+        act(() => {
+            const state = result.current
+            state.fruit = 'orange'
+        })
+    }).toThrow(
+        "Cannot assign to read only property 'fruit' of object '[object Object]'"
+    )
 })
