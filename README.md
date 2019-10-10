@@ -1,5 +1,14 @@
 # use-convenient-state
 
+## DEPRECATED
+
+This hook can cause issues with stale references, and doesn't follow React's intended usage of state when using hooks. I am no longer using it and I don't recommend using it.
+
+Instead, you can consider snippets for your IDE that make it faster and easier to declare new state variables, e.g.:
+https://marketplace.visualstudio.com/items?itemName=AlDuncanson.react-hooks-snippets
+
+---
+
 Experimental React hook to make it more convenient to initialize multiple state values at once.
 
 ## Usage
